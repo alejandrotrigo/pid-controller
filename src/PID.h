@@ -6,28 +6,27 @@ public:
   /*
   * Errors
   */
-  double p_error_;
-  double i_error_;
-  double d_error_;
-  double total_error_;
+  double p_error;
+  double i_error;
+  double d_error;
+  double total_error;
 
   /*
   * Coefficients
   */ 
-  double Kp_;
-  double Ki_;
-  double Kd_;
+  double Kp;
+  double Ki;
+  double Kd;
 
   /*
   * Other variables
   */
 	
-  double cte_;
-  double prev_cte_;
-  double diff_cte_;
-  double int_cte_; 
-
-  double steering_angle_;
+  double cte; 
+  
+  int step;
+  std::vector<double> dp;
+  double best_error;
 
   /*
   * Constructor

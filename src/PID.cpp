@@ -16,41 +16,44 @@ void PID::Twiddle() {
 
 void PID::Init(double Kp, double Ki, double Kd) {
 	
-	Kp_ = Kp;
-	Ki_ = Ki;
-	Kd_ = Kd;
+	this->Kp = Kp;
+	this->Ki = Ki;
+	this->Kd = Kd;
 
-	cte_ = 0;	
-	prev_cte_ = 0;
-	diff_cte_ = 0;
-	int_cte_ = 0;
 
-	p_error_ = 0;
-	i_error_ = 0;
-	d_error_ = 0;	
-	total_error_ = 0;
+	p_error = 0;
+	i_error = 0;
+	d_error = 0;	
+	total_error = 0;
+	
+	step = 0;
+	dp = {Kp*0.1}, Ki*0.1, Kd*0.1};
+	best_error = std::numeric_limits<double>::max();
 
 	return;
 }
 
 void PID::UpdateError(double cte) {
-	prev_cte_ = cte_;
-	cte_ = cte;
-	diff_cte_ = cte_ - prev_cte_;
-	int_cte_ += cte_; 
-
-	steering_angle_ = - Kp_ * cte_ - Ki_ * diff_cte_ - Kd_ * int_cte_;
-
-	p_error_ = Kp_ * cte_;
-	i_error_ = Ki_ * int_cte_;
-	d_error_ = Kd_ * (diff_cte_);
+	
+	d_error = cte - p_error; 
+	p_error = cte;
+	i_error += cte;
 
 	
 }
 
 double PID::TotalError() {
 
-	total_error_ = p_error_ + i_error_ + d_error_;
-	return total_error_;
+	total_error = Kp*p_error + Ki*i_error + Kd*d_error;
+	return total_error;
 }
 
+void PID::twiddle() {
+	
+	if (total_error < best_error) {
+		total_error = best_error;
+		dp[step] *= 1.1;
+	}else{
+		
+	}
+}
