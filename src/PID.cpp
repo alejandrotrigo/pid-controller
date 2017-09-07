@@ -10,9 +10,6 @@ PID::PID() {}
 
 PID::~PID() {}
 
-void PID::Twiddle() {
-
-}
 
 void PID::Init(double Kp, double Ki, double Kd) {
 	
@@ -26,9 +23,9 @@ void PID::Init(double Kp, double Ki, double Kd) {
 	d_error = 0;	
 	total_error = 0;
 	
-	step = 0;
-	dp = {Kp*0.1}, Ki*0.1, Kd*0.1};
-	best_error = std::numeric_limits<double>::max();
+	/*step = 0;
+	dp = {Kp*0.1, Ki*0.1, Kd*0.1};
+	best_error = std::numeric_limits<double>::max();*/
 
 	return;
 }
@@ -48,7 +45,7 @@ double PID::TotalError() {
 	return total_error;
 }
 
-void PID::twiddle() {
+/*void PID::twiddle(double tolerance,int step) {
 	
 	if (total_error < best_error) {
 		total_error = best_error;
@@ -57,3 +54,4 @@ void PID::twiddle() {
 		
 	}
 }
+*/

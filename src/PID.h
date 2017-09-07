@@ -24,9 +24,9 @@ public:
 	
   double cte; 
   
-  int step;
+  /*int step;
   std::vector<double> dp;
-  double best_error;
+  double best_error;*/
 
   /*
   * Constructor
@@ -41,7 +41,7 @@ public:
   /*
   * Update the variables values
   */
-  void Twiddle();  
+  //void Twiddle();  
 
   /*
   * Initialize PID.
